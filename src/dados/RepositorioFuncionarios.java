@@ -25,6 +25,11 @@ public class RepositorioFuncionarios {
 	}
 	
 	
+	public void cadastrarFuncionario(Funcionario f)
+	{
+		
+	}
+	
 	
 	
 	
