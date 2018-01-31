@@ -4,3 +4,5 @@ Project from the computer science students emilia galdino and leonardo monte, fr
 Its a not fully project of an database from a supermarket called ichiba,that means supermarket in japanase.
 if you need anything from the code, feel free to get. さよなら.
 私は教授が嫌いです
+
+ファックリナルド
