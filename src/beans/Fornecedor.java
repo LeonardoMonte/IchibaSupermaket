@@ -28,6 +28,10 @@ public class Fornecedor {
 		
 	}
 	
+	public Fornecedor() {
+		
+	}
+
 	public ArrayList getTelefone()
 	{
 		return this.telefone;
@@ -105,7 +109,6 @@ public class Fornecedor {
 		this.ativo = ativo;
 	}
 
-	
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -119,6 +122,11 @@ public class Fornecedor {
 				return false;
 		} else if (!CNPJ.equals(other.CNPJ))
 			return false;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
 		if (estado == null) {
 			if (other.estado != null)
 				return false;
@@ -126,6 +134,9 @@ public class Fornecedor {
 			return false;
 		return true;
 	}
+
+	
+
 	
 	
 	
