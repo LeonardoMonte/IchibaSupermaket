@@ -9,7 +9,11 @@ public class DBA extends Funcionario{
 				endereco, telefone);
 		
 	}
-
+	
+	public DBA()
+	{
+		super();
+	}
 
 
 }

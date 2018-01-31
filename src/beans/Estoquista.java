@@ -9,7 +9,11 @@ public class Estoquista extends Funcionario {
 				endereco, telefone);
 		
 	}
-
+	
+	public Estoquista()
+	{
+		super();
+	}
 
 
 }

@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import beans.Funcionario;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
+import interfaces.RepositorioFuncionarioInterface;
 
-public class RepositorioFuncionarios {
+
+public class RepositorioFuncionarios implements RepositorioFuncionarioInterface {
+	
 	private static RepositorioFuncionarios instancia;
 	private ArrayList<Funcionario> listafuncionarios;
 	
@@ -42,7 +45,16 @@ public class RepositorioFuncionarios {
 			
 	}
 	
-	public void removerFuncionario(String cpf) throws Objectnotfound{
+	public void atualizarFuncionario(Funcionario f) throws Objectnotfound, Objetojaexiste
+	{
+		this.removerFuncionario(f.getCpf());
+		this.cadastrarFuncionario(f);
+		
+		
+	}
+	
+	public void removerFuncionario(String cpf) throws Objectnotfound
+	{
 
 		Object f = new Object();
 		f = this.buscarFuncionario(cpf);
@@ -54,7 +66,8 @@ public class RepositorioFuncionarios {
 		}
 	}
 	
-	public int procurarIndiceF(String cpf) {
+	public int procurarIndiceF(String cpf) throws Objectnotfound
+	{
 
 		int cont = -1;
 
@@ -63,23 +76,22 @@ public class RepositorioFuncionarios {
 				cont = x;
 			}
 		}
+		
+		if( cont < 0 )
+		{
+			throw new Objectnotfound(cpf);
+		}
+		
 		return cont;
 	}
 	
-	public Funcionario buscarFuncionario(String cpf) throws Objectnotfound {
+	public Funcionario buscarFuncionario(String cpf) throws Objectnotfound 
+	{
 
 		Funcionario resultado = null;
 
 		int i = this.procurarIndiceF(cpf);
-
-		if (i >= 0) {
-			resultado = this.listafuncionarios.get(i);
-		}
-		else
-		{
-			throw new Objectnotfound(cpf);
-		}
-
+		resultado = this.listafuncionarios.get(i);
 		return resultado;
 
 	}

@@ -9,6 +9,10 @@ public class Entregador extends Funcionario {
 				endereco, telefone);
 	}
 
-
+	
+	public Entregador()
+	{
+		super();
+	}
 
 }

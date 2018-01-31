@@ -12,6 +12,11 @@ public class SubCategoria {
 		this.cod_categoria = cod_categoria;
 		this.descricao = descricao;
 	}
+	
+	public SubCategoria()
+	{
+		
+	}
 
 	public String getCodigo() {
 		return codigo;

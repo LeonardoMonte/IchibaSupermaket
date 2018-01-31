@@ -9,6 +9,11 @@ public class SurpevisorEstoque extends Funcionario {
 				endereco, telefone);
 		
 	}
+	
+	public SurpevisorEstoque()
+	{
+		super();
+	}
 
 
 

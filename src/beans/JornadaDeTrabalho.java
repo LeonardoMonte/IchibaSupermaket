@@ -6,7 +6,10 @@ public class JornadaDeTrabalho {
 	private String descricao;
 	private boolean trabalhasabado = true;
 	
-	
+	public JornadaDeTrabalho()
+	{
+		
+	}
 	
 	public JornadaDeTrabalho ( String id , String descricao )
 	{

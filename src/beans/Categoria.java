@@ -12,6 +12,11 @@ public class Categoria {
 		
 	}
 	
+	public Categoria()
+	{
+		
+	}
+	
 	public String getCodigo()
 	{
 		return this.codigo;

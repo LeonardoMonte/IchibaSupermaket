@@ -12,6 +12,11 @@ public class Unidade {
 		this.descricao = descricao;
 		this.sigla = sigla;	
 	}
+	
+	public Unidade()
+	{
+		
+	}
 
 	public String getCodigo() {
 		return codigo;

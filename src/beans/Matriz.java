@@ -5,6 +5,10 @@ public class Matriz {
 	private String CNPJ;
 	private String NomeFantasia;
 	
+	public Matriz()
+	{
+		
+	}
 	
 	public Matriz( String CNPJ, String NomeFantasia)
 	{

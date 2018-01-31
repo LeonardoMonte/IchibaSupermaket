@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import beans.Fornecedor;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
+import interfaces.RepositorioFornecedorInterface;
 
 
-public class RepositorioFornecedor {
+public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 	
 	private static RepositorioFornecedor instancia;
 	private ArrayList<Fornecedor> listafornecedor;
@@ -28,7 +29,7 @@ public class RepositorioFornecedor {
 		return instancia;
 	}
 	
-	
+		
 	public void cadastrarFornecedor (Fornecedor f) throws Objetojaexiste 
 	{
 		boolean result = this.fornecedorexiste(f.getCodigo());
@@ -44,7 +45,14 @@ public class RepositorioFornecedor {
 			
 	}
 	
-	public void removerFornecedor(String codigo) throws Objectnotfound{
+	public void atualiazarFornecedor(Fornecedor f) throws Objectnotfound, Objetojaexiste
+	{
+		this.removerFornecedor(f.getCodigo());
+		this.cadastrarFornecedor(f);
+	}
+	
+	public void removerFornecedor(String codigo) throws Objectnotfound
+	{
 
 		Fornecedor f = new Fornecedor();
 		f = this.buscarFornecedor(codigo);
@@ -56,7 +64,8 @@ public class RepositorioFornecedor {
 		}
 	}
 	
-	public int procurarIndiceF(String codigo) {
+	public int procurarIndiceF(String codigo) throws Objectnotfound 
+	{
 
 		int cont = -1;
 
@@ -65,23 +74,22 @@ public class RepositorioFornecedor {
 				cont = x;
 			}
 		}
+		
+		if ( cont < 0 )
+		{
+			throw new Objectnotfound(codigo);
+		}
+		
 		return cont;
 	}
 	
-	public Fornecedor buscarFornecedor(String codigo ) throws Objectnotfound {
+	public Fornecedor buscarFornecedor(String codigo ) throws Objectnotfound 
+	{
 
 		Fornecedor resultado = null;
 
 		int i = this.procurarIndiceF(codigo);
-
-		if (i >= 0) {
-			resultado = this.listafornecedor.get(i);
-		}
-		else
-		{
-			throw new Objectnotfound(codigo);
-		}
-
+		resultado = this.listafornecedor.get(i);
 		return resultado;
 
 	}

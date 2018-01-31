@@ -8,6 +8,11 @@ public class Gerente extends Funcionario{
 		super(cpf, id_jornada, seq_filial, CNPJ_Matriz, data_admissao, sex, estadocivil, login, senha, RG, nome, situacao,
 				endereco, telefone);
 	}
+	
+	public Gerente()
+	{
+		super();
+	}
 
 
 }

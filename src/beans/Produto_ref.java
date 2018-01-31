@@ -21,6 +21,11 @@ public class Produto_ref {
 	private float preco_ult_compra;
 	
 	
+	public Produto_ref()
+	{
+		
+	}
+	
 	public Produto_ref(String codigo, String id_unidade, String id_marca, String id_ncm, String id_categoria,
 			String id_subcategoria, String id_fornecedor, int qtd_estoque, float iCMS, String cST,
 			float preco_por_tabela, String cod_barra, float freq_pedido, String descricao, int qtd_min,

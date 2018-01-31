@@ -42,6 +42,9 @@ public abstract class Funcionario {
 		
 	}
 	
+	public Funcionario() {
+	}
+
 	public ArrayList getTelefone()
 	{
 		return this.telefone;

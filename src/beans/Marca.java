@@ -5,6 +5,11 @@ public class Marca {
 	private String codigo;
 	private String descricao;
 	
+	public Marca()
+	{
+		
+	}
+	
 	public Marca( String codigo , String descricao)
 	{
 		this.codigo = codigo;

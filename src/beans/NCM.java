@@ -6,6 +6,12 @@ public class NCM {
 	private String descricao;
 	private String codMercosul;
 	
+	public NCM()
+	{
+		
+	}
+	
+	
 	public NCM(String id, String descricao, String codMercosul) {
 	
 		this.id = id;

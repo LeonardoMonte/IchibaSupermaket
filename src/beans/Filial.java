@@ -11,6 +11,11 @@ public class Filial {
 	private int quantidadefunc;
 	private ArrayList<String> telefone;
 	
+	public Filial()
+	{
+		
+	}
+	
 	public Filial ( String seq , String cnpj , String cpf, String end, int quant , String telefone )
 	{
 		this.sequencial = seq;
