@@ -9,7 +9,6 @@ import exceptions.Objetojaexiste;
 public class Fachada {
 
 	private static Fachada instancia;
-	
 	private GerenFuncionario gerenfuncionario;
 	private GerenFornecedor gerenfornecedor;
 	private GerenProduto gerenproduto;
