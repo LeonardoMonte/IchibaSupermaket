@@ -201,9 +201,17 @@ public abstract class Funcionario {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [cpf=" + cpf + "\n id_jornada=" + id_jornada + "\n seq_filial=" + seq_filial
+				+ "\n CNPJ_Matriz=" + CNPJ_Matriz + "\n data_admissao=" + data_admissao + "\n sex=" + sex
+				+ "\n estadocivil=" + estadocivil + "\n login=" + login + "\n senha=" + senha + "\n RG=" + RG + "\n nome="
+				+ nome + "\n situacao=" + situacao + "\n endereco=" + endereco + "\n telefone=" + telefone + "]\n\n";
+	}
 	
 	
-	
+		
 	
 	
 }

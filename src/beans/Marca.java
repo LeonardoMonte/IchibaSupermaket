@@ -47,6 +47,11 @@ public class Marca {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Marca [codigo=" + codigo + ", descricao=" + descricao + "]";
+	}
 	
 	
 	

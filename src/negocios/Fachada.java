@@ -1,5 +1,7 @@
 package negocios;
 
+import java.util.List;
+
 import beans.Fornecedor;
 import beans.Funcionario;
 import beans.Produto_ref;
@@ -65,6 +67,11 @@ public class Fachada {
 		return this.gerenfuncionario.existe(cpf);
 	}
 	
+	public List<Funcionario> listarFuncionarios()
+	{
+		return this.gerenfuncionario.listar();
+	}
+	
 	// FIM FUNCIONARIO
 	
 	
@@ -98,6 +105,11 @@ public class Fachada {
 	public boolean existeFornecedor(String codigo)
 	{
 		return this.gerenfornecedor.existe(codigo);
+	}
+	
+	public List<Fornecedor> listarFornecedores()
+	{
+		return this.gerenfornecedor.listar();
 	}
 	
 	
@@ -134,6 +146,11 @@ public class Fachada {
 	public boolean existeProduto(String codigo)
 	{
 		return this.gerenproduto.existe(codigo);
+	}
+	
+	public List<Produto_ref> listarProdutos()
+	{
+		return this.gerenproduto.listar();
 	}
 	
 	

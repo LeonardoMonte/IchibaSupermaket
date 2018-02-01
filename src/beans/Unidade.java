@@ -55,6 +55,10 @@ public class Unidade {
 			return false;
 		return true;
 	}
+
+	public String toString() {
+		return "Unidade [codigo=" + codigo + ", descricao=" + descricao + ", sigla=" + sigla + "]";
+	}
 	
 	
 	

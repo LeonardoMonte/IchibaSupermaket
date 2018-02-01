@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 import beans.Produto_ref;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -17,6 +19,8 @@ public interface RepositorioProdutoInterface {
 	public int procurarIndiceP(String codigo) throws Objectnotfound;
 	
 	public boolean produtorexiste(String codigo);
+	
+	public List<Produto_ref> listarprodutos();
 	
 	
 }

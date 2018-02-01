@@ -77,6 +77,12 @@ public class Filial {
 	{
 		this.quantidadefunc--;
 	}
+
+	@Override
+	public String toString() {
+		return "Filial [sequencial=" + sequencial + ", CNPJ_Matriz=" + CNPJ_Matriz + ", CPF_gerente=" + CPF_gerente
+				+ ", endereco=" + endereco + ", quantidadefunc=" + quantidadefunc + ", telefone=" + telefone + "]";
+	}
 	
 	
 	

@@ -60,6 +60,12 @@ public class NCM {
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "NCM [id=" + id + ", descricao=" + descricao + ", codMercosul=" + codMercosul + "]";
+	}
 	
 	
 	

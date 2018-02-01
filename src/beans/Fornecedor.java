@@ -135,6 +135,12 @@ public class Fornecedor {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Fornecedor [codigo=" + codigo + "\n nome=" + nome + "\n CNPJ=" + CNPJ + "\n rua=" + rua + "\n bairro="
+				+ bairro + "\n cep=" + cep + "\n estado=" + estado + "\n ativo=" + ativo + "\n telefone=" + telefone + "]\n\n\n";
+	}
+
 	
 
 	

@@ -1,6 +1,7 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Fornecedor;
 import exceptions.Objectnotfound;
@@ -108,6 +109,12 @@ public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 		}
 		
 		return resultado;	
+	}
+	
+	
+	public List<Fornecedor> listarfornecedor()
+	{
+		return this.listafornecedor;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Funcionario;
 import exceptions.Objectnotfound;
@@ -109,6 +110,11 @@ public class RepositorioFuncionarios implements RepositorioFuncionarioInterface 
 		}
 		
 		return resultado;	
+	}
+	
+	public List<Funcionario> listarfuncionarios()
+	{
+		return this.listafuncionarios;
 	}
 	
 	

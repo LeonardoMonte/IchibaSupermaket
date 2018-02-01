@@ -1,5 +1,7 @@
 package negocios;
 
+import java.util.List;
+
 import beans.Fornecedor;
 import dados.RepositorioFornecedor;
 import exceptions.Objectnotfound;
@@ -55,6 +57,11 @@ public class GerenFornecedor {
 	public boolean existe(String codigo)
 	{
 		return this.rep.fornecedorexiste(codigo);
+	}
+	
+	public List<Fornecedor> listar()
+	{
+		return this.rep.listarfornecedor();
 	}
 	
 	

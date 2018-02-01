@@ -1,5 +1,7 @@
 package negocios;
 
+import java.util.List;
+
 import beans.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.Objectnotfound;
@@ -54,6 +56,11 @@ public class GerenFuncionario {
 	public boolean existe(String cpf)
 	{
 		return this.rep.funcionarioexiste(cpf);
+	}
+	
+	public List<Funcionario> listar()
+	{
+		return this.rep.listarfuncionarios();
 	}
 	
 }

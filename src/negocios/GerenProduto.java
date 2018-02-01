@@ -1,5 +1,7 @@
 package negocios;
 
+import java.util.List;
+
 import beans.Produto_ref;
 import dados.RepositorioProdutos;
 import exceptions.Objectnotfound;
@@ -56,5 +58,9 @@ public class GerenProduto {
 		return this.rep.produtorexiste(codigo);
 	}
 	
+	public List<Produto_ref> listar()
+	{
+		return this.rep.listarprodutos();
+	}
 	
 }

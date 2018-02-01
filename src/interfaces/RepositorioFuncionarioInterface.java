@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 import beans.Funcionario;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -17,6 +19,8 @@ public interface RepositorioFuncionarioInterface {
 	public Funcionario buscarFuncionario(String cpf) throws Objectnotfound;
 	
 	public boolean funcionarioexiste(String cpf);
+	
+	public List<Funcionario> listarfuncionarios();
 	
 	
 	

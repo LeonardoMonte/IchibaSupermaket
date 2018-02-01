@@ -30,6 +30,13 @@ public class Matriz {
 	{
 		this.NomeFantasia = neww;
 	}
+
+	@Override
+	public String toString() {
+		return "Matriz [CNPJ=" + CNPJ + ", NomeFantasia=" + NomeFantasia + "]";
+	}
+	
+	
 	
 	
 }

@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 import beans.Fornecedor;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -17,6 +19,8 @@ public interface RepositorioFornecedorInterface {
 	public Fornecedor buscarFornecedor(String codigo ) throws Objectnotfound;
 	
 	public boolean fornecedorexiste(String codigo);
+	
+	public List<Fornecedor> listarfornecedor();
 	
 	
 	

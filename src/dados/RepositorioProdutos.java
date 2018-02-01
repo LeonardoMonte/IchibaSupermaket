@@ -1,6 +1,7 @@
 package dados;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Produto_ref;
 import exceptions.Objectnotfound;
@@ -115,6 +116,10 @@ public class RepositorioProdutos implements RepositorioProdutoInterface {
 			return resultado;	
 		}
 		
+		public List<Produto_ref> listarprodutos()
+		{
+			return this.listaprodutos;
+		}
 		
 		
 }

@@ -55,6 +55,10 @@ public class SubCategoria {
 			return false;
 		return true;
 	}
+
+	public String toString() {
+		return "SubCategoria [codigo=" + codigo + ", cod_categoria=" + cod_categoria + ", descricao=" + descricao + "]";
+	}
 	
 	
 	

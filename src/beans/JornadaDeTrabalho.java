@@ -45,6 +45,11 @@ public class JornadaDeTrabalho {
 	{
 		this.trabalhasabado = altera;
 	}
+
+	@Override
+	public String toString() {
+		return "JornadaDeTrabalho [id=" + id + ", descricao=" + descricao + ", trabalhasabado=" + trabalhasabado + "]";
+	}
 	
 	
 }

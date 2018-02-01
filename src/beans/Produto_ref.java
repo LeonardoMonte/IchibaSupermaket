@@ -232,6 +232,15 @@ public class Produto_ref {
 			return false;
 		return true;
 	}
+
+	public String toString() {
+		return "Produto_ref [codigo=" + codigo + ", id_unidade=" + id_unidade + ", id_marca=" + id_marca + ", id_ncm="
+				+ id_ncm + ", id_categoria=" + id_categoria + ", id_subcategoria=" + id_subcategoria
+				+ ", id_fornecedor=" + id_fornecedor + ", qtd_estoque=" + qtd_estoque + ", ICMS=" + ICMS + ", CST="
+				+ CST + ", preco_por_tabela=" + preco_por_tabela + ", cod_barra=" + cod_barra + ", freq_pedido="
+				+ freq_pedido + ", descricao=" + descricao + ", qtd_min=" + qtd_min + ", qtd_total_estoque="
+				+ qtd_total_estoque + ", preco_ult_compra=" + preco_ult_compra + "]";
+	}
 	
 	
 	
