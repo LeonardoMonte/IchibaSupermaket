@@ -9,7 +9,7 @@ public abstract class Funcionario {
 	private String seq_filial;
 	private String CNPJ_Matriz;
 	private String data_admissao;
-	private char sex;
+	private String sex;
 	private String estadocivil;
 	private String login;
 	private String senha;
@@ -21,7 +21,7 @@ public abstract class Funcionario {
 	
 	
 	public Funcionario(String cpf , String id_jornada , String seq_filial , String CNPJ_Matriz , 
-			String data_admissao , char sex , String estadocivil , String login , String senha, String RG,
+			String data_admissao , String sex , String estadocivil , String login , String senha, String RG,
 			String nome, String situacao , String endereco , String telefone)
 	{
 		
@@ -38,6 +38,27 @@ public abstract class Funcionario {
 		this.situacao = situacao;
 		this.endereco = endereco;
 		this.telefone.add(telefone);
+		
+		
+	}
+	
+	public Funcionario(String cpf , String id_jornada , String seq_filial , String CNPJ_Matriz , 
+			String data_admissao , String sex , String estadocivil , String login , String senha, String RG,
+			String nome, String situacao , String endereco )
+	{
+		
+		this.cpf = cpf;
+		this.id_jornada = id_jornada;
+		this.seq_filial = seq_filial;
+		this.CNPJ_Matriz = CNPJ_Matriz;
+		this.data_admissao = data_admissao;
+		this.sex = sex;
+		this.estadocivil = estadocivil;
+		this.login = login;
+		this.senha = senha;
+		this.RG = RG;
+		this.situacao = situacao;
+		this.endereco = endereco;
 		
 		
 	}
@@ -108,7 +129,7 @@ public abstract class Funcionario {
 	}
 
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
@@ -168,7 +189,7 @@ public abstract class Funcionario {
 	}
 
 
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 

@@ -24,44 +24,8 @@ public class PrincipalTestes {
        
         /* Creating objects of the type DBA */
        
-        DBA dba1 = new DBA("12220933400" , "0001" , "0001", "23416393000114" , "2005-04-12" ,'F' ,
-                "solteiro" ,"helo.12" , "123" , "1259312" ,"Heloisa Macedo de Souza",  "ativo" ,
-                "Rua Eloy Monteiro Nunes" , "08133552321");
-       
-        DBA dba2 = new DBA ("12220933401" , "0002" , "0002", "23416393000166" , "2014-05-01" ,'M' ,
-                "viúvo" ,"10082" , "122" , "1253312" ,"Aquiles Filho da Ninfa",  "inativo" ,
-                "Rua Felipe Horta" , "08133552322");
-       
-        DBA dba3 = new DBA("12220933405" , "0003" , "0003", "23416353000166" , "2012-03-10" ,'M' ,
-                "viúvo" ,"10085" , "125" , "1253312" ,"Marmoto Filho da Ninfa",  "inativo" ,
-                "Rua Marmota" , "08133552332");
-       
-        /* Creating objects with the repository */
-       
-        Fachada.getInstancia().cadastrarFuncionario(dba1);
-        Fachada.getInstancia().cadastrarFuncionario(dba2);
-        Fachada.getInstancia().cadastrarFuncionario(dba3);
-       
-        /* Printing the objects */
-       
-        System.out.println("IMPRIMINDO FUNCIONARIOS CADASTRADOS");
-        System.out.println(Fachada.getInstancia().listarFuncionarios());
-       
-        /* Testing the update function */
-       
-        Fachada.getInstancia().atualizarFuncionario(dba1);
-        Fachada.getInstancia().atualizarFuncionario(dba2);
-        Fachada.getInstancia().atualizarFuncionario(dba3);
-        
-      
-       
-        System.out.println("Removendo Funcionários  1 e 2.......");
-       
-        /* Testing the delete function */
-       
-        Fachada.getInstancia().removerFuncionario(dba1.getCpf());
-        Fachada.getInstancia().removerFuncionario(dba2.getCpf());
-       
+
+        /*
         /* Apparently it doesn't work */
        
         System.out.println("PÓS DELETE");

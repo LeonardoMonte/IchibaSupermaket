@@ -28,6 +28,31 @@ public class Fornecedor {
 		
 	}
 	
+	public Fornecedor(String codigo, String nome, String cNPJ, String rua, String bairro, String cep, String estado) 
+	{
+		
+		this.codigo = codigo;
+		this.nome = nome;
+		this.CNPJ = cNPJ;
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.estado = estado;
+		
+	}
+	
+	public Fornecedor( String rua, String bairro, String cep, String estado , boolean ativo) 
+	{
+		
+
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.estado = estado;
+		this.ativo = ativo;
+		
+	}
+	
 	public Fornecedor() {
 		
 	}

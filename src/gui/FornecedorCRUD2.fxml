@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CRUDfornecedorcontroller">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="572.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="codigo" layoutX="73.0" layoutY="43.0" prefHeight="31.0" prefWidth="67.0" promptText="Código" />
+            <TextField fx:id="nome" layoutX="201.0" layoutY="43.0" promptText="Nome " />
+            <TextField fx:id="CNPJ" layoutX="446.0" layoutY="43.0" prefHeight="31.0" prefWidth="126.0" promptText="CNPJ" />
+            <TextField fx:id="rua" layoutX="47.0" layoutY="114.0" prefHeight="31.0" prefWidth="119.0" promptText="Rua" />
+            <TextField fx:id="bairro" layoutX="235.0" layoutY="114.0" prefHeight="31.0" prefWidth="119.0" promptText="Bairro" />
+            <TextField fx:id="CEP" layoutX="433.0" layoutY="114.0" prefHeight="31.0" prefWidth="119.0" promptText="CEP" />
+            <TextField fx:id="estado" layoutX="78.0" layoutY="172.0" prefHeight="31.0" prefWidth="137.0" promptText="Estado" />
+            <TextField fx:id="ativo" layoutX="368.0" layoutY="172.0" prefHeight="31.0" prefWidth="103.0" promptText="Ativo" />
+            <Button fx:id="submit" layoutX="253.0" layoutY="499.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+            <Button fx:id="update" layoutX="98.0" layoutY="499.0" mnemonicParsing="false" onAction="#update" text="update" />
+            <Button fx:id="delete" layoutX="402.0" layoutY="499.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+            <Label layoutX="231.0" layoutY="14.0" text="Fornecedor" />
+            <Label fx:id="codigol" layoutX="14.0" layoutY="48.0" text="codigo" />
+            <Label fx:id="nomel" layoutX="152.0" layoutY="48.0" text="nome" />
+            <Label fx:id="CNPJl" layoutX="402.0" layoutY="48.0" text="CNPJ" />
+            <Label fx:id="rual" layoutX="14.0" layoutY="119.0" text="rua" />
+            <Label fx:id="bairrol" layoutX="181.0" layoutY="119.0" text="bairro" />
+            <Label fx:id="CEPl" layoutX="374.0" layoutY="119.0" text="CEP" />
+            <Label fx:id="estadol" layoutX="13.0" layoutY="177.0" text="estado" />
+            <Label fx:id="ativol" layoutX="272.0" layoutY="177.0" text="ativo" />
+            <TableView fx:id="table" layoutX="4.0" layoutY="240.0" onSort="#submit" prefHeight="200.0" prefWidth="594.0">
+              <columns>
+                <TableColumn fx:id="codcolumn" prefWidth="54.0" text="cod" />
+                <TableColumn fx:id="nomec" prefWidth="107.0" text="nome" />
+                  <TableColumn fx:id="CNPJc" prefWidth="51.0" text="CNPJ" />
+                  <TableColumn fx:id="ruac" prefWidth="87.0" text="rua" />
+                  <TableColumn fx:id="bairroc" prefWidth="95.0" text="bairro" />
+                  <TableColumn fx:id="CEPc" prefWidth="49.0" text="CEP" />
+                  <TableColumn fx:id="estadoc" prefWidth="94.0" text="estado" />
+                  <TableColumn fx:id="statusc" prefWidth="55.0" text="ativo" />
+              </columns>
+            </TableView>
+            <Label fx:id="labelaviso" layoutX="185.0" layoutY="455.0" prefHeight="21.0" prefWidth="300.0" />
+         </children>
+      </Pane>
+      <AnchorPane>
+	<!-- TODO Add Nodes -->
+</AnchorPane>
+   </children>
+</AnchorPane>
