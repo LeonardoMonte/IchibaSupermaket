@@ -32,7 +32,7 @@
             <TextField fx:id="qtdtotalestoquet" layoutX="947.0" layoutY="91.0" prefHeight="31.0" prefWidth="129.0" promptText="quantidade total " />
             <TextField fx:id="precoultimacomprat" layoutX="599.0" layoutY="191.0" prefHeight="31.0" prefWidth="78.0" promptText="preço ult " />
             <Button fx:id="submit" layoutX="456.0" layoutY="716.0" mnemonicParsing="false" onAction="#submit" prefHeight="31.0" prefWidth="82.0" text="Submit" />
-            <Button fx:id="update" layoutX="268.0" layoutY="716.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Update " />
+            <Button fx:id="update" layoutX="268.0" layoutY="716.0" mnemonicParsing="false" onAction="#update" prefHeight="31.0" prefWidth="92.0" text="Update " />
             <Button fx:id="delete" layoutX="616.0" layoutY="716.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="78.0" text="Delete" />
             <Label fx:id="codigol" layoutX="20.0" layoutY="47.0" prefHeight="21.0" prefWidth="73.0" text="código" />
             <Label layoutX="437.0" layoutY="14.0" prefHeight="21.0" prefWidth="73.0" text="PRODUTO" />

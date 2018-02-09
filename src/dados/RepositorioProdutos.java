@@ -1,8 +1,12 @@
 package dados;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.ConnectionDataBase;
 import beans.Produto_ref;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -16,7 +20,7 @@ public class RepositorioProdutos implements RepositorioProdutoInterface {
 		
 		private RepositorioProdutos()
 		{
-			this.listaprodutos = new ArrayList<>();
+			this.listaprodutos = this.load();
 			
 		}
 		
@@ -119,6 +123,46 @@ public class RepositorioProdutos implements RepositorioProdutoInterface {
 		public List<Produto_ref> listarprodutos()
 		{
 			return this.listaprodutos;
+		}
+		
+		public static ArrayList<Produto_ref> load()
+		{
+			ArrayList<Produto_ref> array = new ArrayList<>();
+				
+				try
+				{
+				Connection c = ConnectionDataBase.getConnection();
+				Statement s = c.createStatement();
+				ResultSet rs = s.executeQuery("select * from produto_ref");
+				
+				while(rs.next())
+				{
+					
+					
+				Produto_ref p = new Produto_ref(rs.getString("cod"), rs.getString("id_unidade"), 
+						rs.getString("id_marca"), rs.getString("id_ncm"), rs.getString("id_categoria")
+						, rs.getString("id_subcategoria"), rs.getString("id_fornecedor"), 
+						rs.getInt("qtd_estoque"), rs.getFloat("ICMS"), rs.getString("CST")
+						, rs.getFloat("preco_por_tabela"), rs.getString("cod_barra"), rs.getFloat("freq_pedido"), 
+						rs.getString("descricao"),rs.getInt("qtd_min"), rs.getInt("qtd_total_estoque"),
+						rs.getFloat("preco_ult_compra"));
+					
+					array.add(p);
+					
+					
+				}
+				
+				s.close();
+				c.close();
+				
+				}
+				
+				catch(Exception e)
+				{
+					e.getMessage();
+				}
+			
+			return array;
 		}
 		
 		

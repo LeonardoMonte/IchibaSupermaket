@@ -6,6 +6,7 @@ import beans.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
+import exceptions.Wrongsenha;
 import interfaces.RepositorioFuncionarioInterface;
 
 public class GerenFuncionario {
@@ -61,6 +62,11 @@ public class GerenFuncionario {
 	public List<Funcionario> listar()
 	{
 		return this.rep.listarfuncionarios();
+	}
+	
+	public void Login(String login, String senha) throws Wrongsenha
+	{
+		this.rep.login(login, senha);
 	}
 	
 }

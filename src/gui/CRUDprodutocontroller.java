@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import beans.ConnectionDataBase;
 import beans.Produto_ref;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -39,7 +42,6 @@ public class CRUDprodutocontroller implements Initializable{
 	
 	@FXML
 	private TextField idncmt;
-	
 	
 	@FXML
 	private TextField idunidadet;
@@ -199,6 +201,9 @@ public class CRUDprodutocontroller implements Initializable{
 	@FXML
 	private TableColumn<Produto_ref, String> descricao;
 	
+	
+
+	
 	@FXML
 	private void delete(ActionEvent event)
 	{
@@ -213,6 +218,24 @@ public class CRUDprodutocontroller implements Initializable{
 		{
 			
 			try {
+				
+				Connection c;
+				try {
+					c = ConnectionDataBase.getConnection();
+					Statement s = c.createStatement();
+					s.executeUpdate("delete from produto_ref where cod = '" + codigo + "';");
+
+					
+					s.close();
+					c.close();
+					
+				
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				Fachada.getInstancia().removerProduto(codigo);
 				
 				try
@@ -251,10 +274,131 @@ public class CRUDprodutocontroller implements Initializable{
 		}
 		
 		
+	}
+	
+	@FXML
+	private void update(ActionEvent event)
+	{
+		String freqpedido , quantidadetotal, descricao , qtdestoque , precoultimacompra ,precoportabela, qtdmin , codigo;
+		
+		freqpedido = this.freqpedidot.getText();
+		quantidadetotal = this.qtdtotalestoquet.getText();
+		descricao = this.descricaot.getText();
+		qtdestoque = this.qtdestoquet.getText();
+		precoultimacompra = this.precoultimacomprat.getText();
+		precoportabela = this.precoportabelat.getText();
+		qtdmin = this.qtdminimat.getText();
+		codigo = this.codigot.getText();
+		
+		if(!codigo.equals("") && this.idfornecedort.getText().equals("") && this.icmst.getText().equals("") && this.idncmt.getText().equals("") &&
+				!freqpedido.equals("") && this.idunidadet.getText().equals("") && this.idmarcat.getText().equals("") &&
+				this.cstt.getText().equals("") && this.idcodbarrast.getText().equals("") && !quantidadetotal.equals("") &&
+				this.idcategoriat.getText().equals("") && !precoportabela.equals("") && !descricao.equals("") &&
+				this.idsubcategoriat.getText().equals("") && !qtdmin.equals("") && !precoultimacompra.equals("") &&
+				!qtdestoque.equals(""))
+		{
+			
+			int qtdestoque2 = Integer.parseInt(qtdestoque);
+			float precoportable = Float.parseFloat(precoportabela);
+			float freqpedido2 = Float.parseFloat(freqpedido);
+			int qtdmin2 = Integer.parseInt(qtdmin);
+			int qtdtotalestoque2 = Integer.parseInt(quantidadetotal);
+			float precoultimacompra2 = Float.parseFloat(precoultimacompra);
+			
+			try {
+				
+				
+				Produto_ref p = Fachada.getInstancia().buscarProduto(codigo);
+				p.setQtd_estoque(qtdestoque2);
+				p.setPreco_por_tabela(precoportable);
+				p.setFreq_pedido(freqpedido2);
+				p.setQtd_min(qtdmin2);
+				p.setQtd_total_estoque(qtdtotalestoque2);
+				p.setPreco_ult_compra(precoultimacompra2);
+				p.setDescricao(descricao);
+				
+				
+				try {
+					
+					Connection c;
+					try {
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("update produto_ref set qtd_estoque = "+ qtdestoque2+" "
+								+ " , preco_por_tabela = "+precoportable+" , freq_pedido = "+ freqpedido2+" , "
+										+ " descricao = '"+descricao+"' , qtd_min = "+ qtdmin2	+ " , qtd_total_estoque = "+qtdtotalestoque2+" "
+												+ " , preco_ult_compra = "+precoultimacompra2+"  where cod = '"+ codigo +"' ;" );
+
+						
+						s.close();
+						c.close();
+						
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					Fachada.getInstancia().atualizarProduto(p);
+					
+					try
+					{
+						((Node) (event.getSource())).getScene().getWindow().hide();
+						
+						Parent root = FXMLLoader.load(getClass().getResource("ProdutoCRUD2.fxml"));
+						Scene scene = new Scene(root);
+						Stage stage = new Stage();
+						stage.setScene(scene);
+						stage.setTitle("Login");
+						stage.show();
+					}
+					catch(Exception e)
+					{
+						System.out.println("Erro!");
+						System.out.println(e.getMessage());
+					}
+					
+					
+					
+				} catch (Objetojaexiste e) {
+					
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning Dialog");
+					alert.setHeaderText("Impossivel realizar a acao");
+					alert.setContentText("Produto com o codigo " + e.getId() + " Ja existe");
+					alert.showAndWait();
+				}
+				
+				
+				
+				
+				
+				
+				
+			} catch (Objectnotfound e) {
+				
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Warning Dialog");
+				alert.setHeaderText("Impossivel realizar a acao");
+				alert.setContentText("Fornecedor com o codigo " + e.getidObjeto() + " nao existe");	
+				alert.showAndWait();
+			}
+			
+			
+			
+			
+		}
+		else
+		{
+			this.labelaviso.setText("preencha apenas os campos que devem ser preenchidos");
+		}
+		
 		
 		
 		
 	}
+	
 	
 	@FXML 
 	private void submit(ActionEvent event)
@@ -296,9 +440,37 @@ public class CRUDprodutocontroller implements Initializable{
 			int qtdtotalestoque2 = Integer.parseInt(qtdtotalestoque);
 			float precoultimacompra2 = Float.parseFloat(precoultcompra);
 			
-			Produto_ref p = new Produto_ref(codigo, idunidade, idmarca, idncm, idcategoria, idsubcategoria, idfornecedor, qtdestoque2, icms2, cst, precoportable, codigodebarras, freqpedido2, descricao, qtdmin2, qtdtotalestoque2, precoultimacompra2);
+			Produto_ref p = new Produto_ref(codigo, idunidade, idmarca, idncm, idcategoria, 
+					idsubcategoria, idfornecedor, qtdestoque2, icms2, cst, precoportable, 
+					codigodebarras, freqpedido2, descricao, qtdmin2, qtdtotalestoque2, precoultimacompra2);
 			
 			try {
+				
+				Connection c;
+				try {
+					
+					c = ConnectionDataBase.getConnection();
+					Statement s = c.createStatement();
+					s.executeUpdate("INSERT INTO produto_ref (cod, id_unidade , id_marca , id_ncm , "
+							+ "id_categoria, id_subcategoria, id_fornecedor , qtd_estoque ,\r\n" + 
+							" ICMS , CST , preco_por_tabela , cod_barra , "
+							+ "freq_pedido , descricao , qtd_min, qtd_total_estoque , preco_ult_compra) VALUES"
+							+ " ('"+codigo+"' , '"+idunidade+"' , '"+idmarca+"', '"+idncm+"' "
+							+ ", '"+idcategoria+"' , '"+idsubcategoria+"' , '"+idfornecedor+"' , "+qtdestoque2+" , "
+							+ " "+icms2+" , '"+cst+"' , "+ precoportable+", "
+							+ "'"+codigodebarras+"' ,  "+freqpedido2+" , '"+descricao+"' , "+qtdmin2+" , "+qtdtotalestoque2+" , "+precoultimacompra2+" );");
+
+					
+					s.close();
+					c.close();
+					
+				} catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
 				Fachada.getInstancia().cadastrarProduto(p);
 				
 				try

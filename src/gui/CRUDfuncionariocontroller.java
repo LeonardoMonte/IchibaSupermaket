@@ -1,10 +1,16 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import beans.ConnectionDataBase;
 import beans.Funcionario;
+import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -144,6 +150,83 @@ public class CRUDfuncionariocontroller implements Initializable {
 	private ToggleGroup group;
 	
 	@FXML
+	private void delete(ActionEvent event)
+	{
+		String cpf = this.cpft.getText();
+		
+		if( !cpf.equals("") && this.idjornadat.getText().equals("") && this.seqfilialt.getText().equals("") && this.cnpjmatrizt.getText().equals("") &&
+				this.dtadmissaot.getText().equals("") && this.sexot.getText().equals("") && this.estadocivilt.getText().equals("") 
+				&& this.logint.getText().equals("") && this.senhat.getText().equals("") && this.rgt.getText().equals("") &&
+				this.nomet.getText().equals("") && this.ativot.getText().equals("") && this.enderecot.getText().equals(""))
+		{
+			
+			try {
+				
+				
+				Fachada.getInstancia().buscarFuncionario(cpf);
+				
+			Connection c;
+				try {
+					c = ConnectionDataBase.getConnection();
+					Statement s = c.createStatement();
+					s.executeUpdate("delete from funcionario where CPF = '" + cpf + "';");
+
+					
+					s.close();
+					c.close();
+					
+					Fachada.getInstancia().removerFuncionario(cpf);
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+				
+				
+				
+				try
+				{
+					((Node) (event.getSource())).getScene().getWindow().hide();
+					
+					Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+					Scene scene = new Scene(root);
+					Stage stage = new Stage();
+					stage.setScene(scene);
+					stage.setTitle("Login");
+					stage.show();
+				}
+				catch(Exception e)
+				{
+					System.out.println("Erro!");
+					System.out.println(e.getMessage());
+				}
+				
+				
+			} catch (Objectnotfound e) 
+			{
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Warning Dialog");
+				alert.setHeaderText("Impossivel realizar a acao");
+				alert.setContentText("Funcionario com o codigo " + e.getidObjeto() + " nao existe");	
+				alert.showAndWait();
+			}
+			
+			
+		}
+		else
+		{
+			this.labelaviso.setText("Preencha apenas o cpf");
+		}
+		
+		
+		
+		
+	}
+	
+	@FXML
 	private void submit(ActionEvent event)
 	{
 		String cpf, idjornada, seqfilial , cnpjmatriz, dataadmissao , sex, estadocivil, login , senha , rg , nome , situacao, endereco;
@@ -170,9 +253,32 @@ public class CRUDfuncionariocontroller implements Initializable {
 			if(this.DBA.isSelected())
 			{
 				
-				beans.DBA dba = new beans.DBA(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, rg, nome, situacao, endereco);
+				beans.DBA dba = new beans.DBA(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, "DBA", rg, nome, situacao, endereco);
+				
 				
 				try {
+					
+					Connection c;
+					try {
+						
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
+								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
+								+ "('"+ cpf +"' , '"+ idjornada +"' , '"+ seqfilial+ "' , '"+cnpjmatriz+"' "
+										+ ", '"+dataadmissao+"', '"+sex+"' , '"+estadocivil+"', '"+login+"', '"+senha+"',"
+												+ "'"+rg+"', '"+nome+"' , '"+situacao+"', '"+endereco+"');");
+						
+						s.executeUpdate("INSERT INTO DBA (CPF) VALUES ('"+cpf+"');");
+						
+						s.close();
+						c.close();
+						
+					} catch (Exception e1) 
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}			
 					
 					Fachada.getInstancia().cadastrarFuncionario(dba);
 					
@@ -194,7 +300,8 @@ public class CRUDfuncionariocontroller implements Initializable {
 					}
 					
 					
-				} catch (Objetojaexiste exc) {
+				} catch (Objetojaexiste exc) 
+				{
 
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Warning Dialog");
@@ -212,9 +319,34 @@ public class CRUDfuncionariocontroller implements Initializable {
 			if(this.gerente.isSelected())
 			{
 				
-				beans.Gerente gerente = new beans.Gerente(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, rg, nome, situacao, endereco);
+				beans.Gerente gerente = new beans.Gerente(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, "gerente", rg, nome, situacao, endereco);
 				
 				try {
+					
+					
+						
+					Connection c;
+						try {
+							
+							c = ConnectionDataBase.getConnection();
+							Statement s = c.createStatement();
+							s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
+									+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
+									+ "('"+ cpf +"' , '"+ idjornada +"' , '"+ seqfilial+ "' , '"+cnpjmatriz+"' "
+											+ ", '"+dataadmissao+"', '"+sex+"' , '"+estadocivil+"', '"+login+"', '"+senha+"',"
+													+ "'"+rg+"', '"+nome+"' , '"+situacao+"', '"+endereco+"');");
+							
+							s.executeUpdate("INSERT INTO gerente (CPF) VALUES ('"+cpf+"');");
+							
+							s.close();
+							c.close();
+							
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}	
+					
+					
 					
 					Fachada.getInstancia().cadastrarFuncionario(gerente);
 					
@@ -253,9 +385,32 @@ public class CRUDfuncionariocontroller implements Initializable {
 			if(this.supervisorestoque.isSelected())
 			{
 				
-				beans.SurpevisorEstoque sup = new beans.SurpevisorEstoque(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, rg, nome, situacao, endereco);
+				beans.SurpevisorEstoque sup = new beans.SurpevisorEstoque(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha,"supervisor estoque", rg, nome, situacao, endereco);
 				
 				try {
+					
+					
+					Connection c;
+					try {
+						
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
+								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
+								+ "('"+ cpf +"' , '"+ idjornada +"' , '"+ seqfilial+ "' , '"+cnpjmatriz+"' "
+										+ ", '"+dataadmissao+"', '"+sex+"' , '"+estadocivil+"', '"+login+"', '"+senha+"',"
+												+ "'"+rg+"', '"+nome+"' , '"+situacao+"', '"+endereco+"');");
+						
+						s.executeUpdate("INSERT INTO supervisorestoque (CPF) VALUES ('"+cpf+"');");
+						
+						s.close();
+						c.close();
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}	
+					
 					
 					Fachada.getInstancia().cadastrarFuncionario(sup);
 					
@@ -295,9 +450,32 @@ public class CRUDfuncionariocontroller implements Initializable {
 			if(this.estoquista.isSelected())
 			{
 				
-				beans.Estoquista estoq = new beans.Estoquista(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, rg, nome, situacao, endereco);
+				beans.Estoquista estoq = new beans.Estoquista(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, "estoquista", rg, nome, situacao, endereco);
 				
 				try {
+					
+					
+					Connection c;
+					try {
+						
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
+								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
+								+ "('"+ cpf +"' , '"+ idjornada +"' , '"+ seqfilial+ "' , '"+cnpjmatriz+"' "
+										+ ", '"+dataadmissao+"', '"+sex+"' , '"+estadocivil+"', '"+login+"', '"+senha+"',"
+												+ "'"+rg+"', '"+nome+"' , '"+situacao+"', '"+endereco+"');");
+						
+						s.executeUpdate("INSERT INTO estoquista (CPF) VALUES ('"+cpf+"');");
+						
+						s.close();
+						c.close();
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}	
+					
 					
 					Fachada.getInstancia().cadastrarFuncionario(estoq);
 					
@@ -335,9 +513,31 @@ public class CRUDfuncionariocontroller implements Initializable {
 			if(this.entregador.isSelected())
 			{
 				
-				beans.Entregador entregador = new beans.Entregador(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, rg, nome, situacao, endereco);
+				beans.Entregador entregador = new beans.Entregador(cpf, idjornada, seqfilial, cnpjmatriz, dataadmissao, sex, estadocivil, login, senha, "entregador", rg, nome, situacao, endereco);
 				
 				try {
+					
+					Connection c;
+					try {
+						
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
+								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
+								+ "('"+ cpf +"' , '"+ idjornada +"' , '"+ seqfilial+ "' , '"+cnpjmatriz+"' "
+										+ ", '"+dataadmissao+"', '"+sex+"' , '"+estadocivil+"', '"+login+"', '"+senha+"',"
+												+ "'"+rg+"', '"+nome+"' , '"+situacao+"', '"+endereco+"');");
+						
+						s.executeUpdate("INSERT INTO entregador (CPF) VALUES ('"+cpf+"');");
+						
+						s.close();
+						c.close();
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}	
+					
 					
 					Fachada.getInstancia().cadastrarFuncionario(entregador);
 					
@@ -386,12 +586,6 @@ public class CRUDfuncionariocontroller implements Initializable {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
@@ -408,9 +602,10 @@ public class CRUDfuncionariocontroller implements Initializable {
 		this.login.setCellValueFactory(new PropertyValueFactory<>("login"));
 		this.senha.setCellValueFactory(new PropertyValueFactory<>("senha"));
 		this.rg.setCellValueFactory(new PropertyValueFactory<>("RG"));
-		this.nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		this.ativo.setCellValueFactory(new PropertyValueFactory<>("situacao"));
 		this.endereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+		this.nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		this.especificacao.setCellValueFactory(new PropertyValueFactory<>("especificao"));
 		
 		this.table.setItems(FXCollections.observableArrayList(f));
 		

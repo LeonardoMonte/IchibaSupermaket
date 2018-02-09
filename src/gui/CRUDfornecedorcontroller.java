@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import beans.ConnectionDataBase;
 import beans.Fornecedor;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -147,6 +150,22 @@ public class CRUDfornecedorcontroller implements Initializable {
 				
 				try {
 					
+					Connection c;
+					try {
+						c = ConnectionDataBase.getConnection();
+						Statement s = c.createStatement();
+						s.executeUpdate("update fornecedor set rua = '"+ rua+"' , bairro = '"+bairro+"' , CEP = '"+ cep+"', estado = '"+ estado+"' , ativo = "+ status2	+ " where cod = '"+ codigo +"' ;" );
+
+						
+						s.close();
+						c.close();
+						
+						
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					Fachada.getInstancia().atualizarFornecedor(f);
 					
 					try
@@ -221,7 +240,25 @@ public class CRUDfornecedorcontroller implements Initializable {
 			
 		{
 			try {
-				Fachada.getInstancia().removerFornecedor(codigo);
+				
+				Fachada.getInstancia().buscarFornecedor(codigo);
+				
+			Connection c;
+				try {
+					c = ConnectionDataBase.getConnection();
+					Statement s = c.createStatement();
+					s.executeUpdate("delete from fornecedor where cod = '" + codigo + "';");
+
+					
+					s.close();
+					c.close();
+					
+					Fachada.getInstancia().removerFornecedor(codigo);
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				try
 				{
@@ -280,6 +317,27 @@ public class CRUDfornecedorcontroller implements Initializable {
 			Fornecedor f = new Fornecedor(codigo, nome, CNPJ, rua, bairro, CEP, estado);
 		
 			try {
+				
+				Connection c;
+				try {
+					
+					c = ConnectionDataBase.getConnection();
+					Statement s = c.createStatement();
+					s.executeUpdate("INSERT INTO fornecedor ( cod , nome , CNPJ , rua , bairro , CEP , estado , ativo ) VALUES"
+							+ " ('"+codigo+"' , '"+nome+"'	  , '"+CNPJ+"' , '"+rua+"' , '"+bairro+"' "
+							+ ", '"+CEP+"' , '"+estado+"' , "+f.getAtivo() +" );");
+
+					
+					s.close();
+					c.close();
+					
+				} catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
 				Fachada.getInstancia().cadastrarFornecedor(f);
 				
 				

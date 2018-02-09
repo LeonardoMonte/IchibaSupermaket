@@ -17,12 +17,13 @@ public abstract class Funcionario {
 	private String nome;
 	private String situacao;
 	private String endereco;
+	private String especificao;
 	private ArrayList<String> telefone = new ArrayList<String>();;
-	
+		
 	
 	public Funcionario(String cpf , String id_jornada , String seq_filial , String CNPJ_Matriz , 
 			String data_admissao , String sex , String estadocivil , String login , String senha, String RG,
-			String nome, String situacao , String endereco , String telefone)
+			String nome, String situacao , String endereco , String especificao )
 	{
 		
 		this.cpf = cpf;
@@ -35,33 +36,15 @@ public abstract class Funcionario {
 		this.login = login;
 		this.senha = senha;
 		this.RG = RG;
+		this.nome = nome;
 		this.situacao = situacao;
 		this.endereco = endereco;
-		this.telefone.add(telefone);
+		this.especificao = especificao;
 		
 		
 	}
 	
-	public Funcionario(String cpf , String id_jornada , String seq_filial , String CNPJ_Matriz , 
-			String data_admissao , String sex , String estadocivil , String login , String senha, String RG,
-			String nome, String situacao , String endereco )
-	{
-		
-		this.cpf = cpf;
-		this.id_jornada = id_jornada;
-		this.seq_filial = seq_filial;
-		this.CNPJ_Matriz = CNPJ_Matriz;
-		this.data_admissao = data_admissao;
-		this.sex = sex;
-		this.estadocivil = estadocivil;
-		this.login = login;
-		this.senha = senha;
-		this.RG = RG;
-		this.situacao = situacao;
-		this.endereco = endereco;
-		
-		
-	}
+	
 	
 	public Funcionario() {
 	}
@@ -167,7 +150,16 @@ public abstract class Funcionario {
 	public String getEndereco() {
 		return endereco;
 	}
-
+	
+	public String getEspecificao()
+	{
+		return this.especificao;
+	}
+	
+	public void setEspecificao(String esp)
+	{
+		this.especificao = esp;
+	}
 
 	public void setId_jornada(String id_jornada) {
 		this.id_jornada = id_jornada;
@@ -223,13 +215,17 @@ public abstract class Funcionario {
 		this.endereco = endereco;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Funcionario [cpf=" + cpf + "\n id_jornada=" + id_jornada + "\n seq_filial=" + seq_filial
-				+ "\n CNPJ_Matriz=" + CNPJ_Matriz + "\n data_admissao=" + data_admissao + "\n sex=" + sex
-				+ "\n estadocivil=" + estadocivil + "\n login=" + login + "\n senha=" + senha + "\n RG=" + RG + "\n nome="
-				+ nome + "\n situacao=" + situacao + "\n endereco=" + endereco + "\n telefone=" + telefone + "]\n\n";
+		return "Funcionario [cpf=" + cpf + ", id_jornada=" + id_jornada + ", seq_filial=" + seq_filial
+				+ ", CNPJ_Matriz=" + CNPJ_Matriz + ", data_admissao=" + data_admissao + ", sex=" + sex
+				+ ", estadocivil=" + estadocivil + ", login=" + login + ", senha=" + senha + ", RG=" + RG + ", nome="
+				+ nome + ", situacao=" + situacao + ", endereco=" + endereco + ", especificao=" + especificao
+				+ ", telefone=" + telefone + "]";
 	}
+
+
 	
 	
 		

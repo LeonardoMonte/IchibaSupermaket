@@ -1,8 +1,12 @@
 package dados;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.ConnectionDataBase;
 import beans.Fornecedor;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
@@ -17,7 +21,7 @@ public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 	
 	private RepositorioFornecedor()
 	{
-		this.listafornecedor = new ArrayList<>();
+		this.listafornecedor = this.load();
 	}
 	
 	public static RepositorioFornecedor getInstancia()
@@ -111,10 +115,45 @@ public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 		return resultado;	
 	}
 	
+	private static ArrayList<Fornecedor> load()
+	{
+		ArrayList<Fornecedor> rep = new ArrayList<>();
+		
+		try
+		{
+		Connection c = ConnectionDataBase.getConnection();
+		Statement s = c.createStatement();
+		ResultSet rs = s.executeQuery("select * from fornecedor");
+		
+		while(rs.next())
+		{
+			Fornecedor f = new Fornecedor(rs.getString("cod"), rs.getString("nome"), rs.getString("CNPJ"),
+					rs.getString("rua"), rs.getString("bairro"), rs.getString("CEP"), rs.getString("estado"));
+			
+			rep.add(f);
+		}
+		
+		s.close();
+		c.close();	
+		
+		}catch(Exception e)
+		{
+			e.getMessage();
+		}
+		
+		
+		
+		return rep;
+		
+		
+	}
+	
 	
 	public List<Fornecedor> listarfornecedor()
 	{
 		return this.listafornecedor;
 	}
+	
+	
 	
 }

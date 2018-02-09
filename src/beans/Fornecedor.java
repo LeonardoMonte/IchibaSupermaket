@@ -81,6 +81,11 @@ public class Fornecedor {
 	public String getNome() {
 		return nome;
 	}
+	
+	public boolean getAtivo()
+	{
+		return this.ativo;
+	}
 
 	public String getCNPJ() {
 		return CNPJ;

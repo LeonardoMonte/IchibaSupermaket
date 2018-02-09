@@ -5,6 +5,7 @@ import java.util.List;
 import beans.Funcionario;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
+import exceptions.Wrongsenha;
 
 public interface RepositorioFuncionarioInterface {
 
@@ -21,6 +22,8 @@ public interface RepositorioFuncionarioInterface {
 	public boolean funcionarioexiste(String cpf);
 	
 	public List<Funcionario> listarfuncionarios();
+	
+	public void login(String login, String senha) throws Wrongsenha;
 	
 	
 	

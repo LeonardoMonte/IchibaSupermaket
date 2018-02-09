@@ -7,6 +7,7 @@ import beans.Funcionario;
 import beans.Produto_ref;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
+import exceptions.Wrongsenha;
 
 public class Fachada {
 
@@ -70,6 +71,11 @@ public class Fachada {
 	public List<Funcionario> listarFuncionarios()
 	{
 		return this.gerenfuncionario.listar();
+	}
+	
+	public void login(String login , String senha) throws Wrongsenha
+	{
+		this.gerenfuncionario.Login(login, senha);
 	}
 	
 	// FIM FUNCIONARIO
