@@ -167,7 +167,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 				
 			Connection c;
 				try {
-					c = ConnectionDataBase.getConnection();
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 					Statement s = c.createStatement();
 					s.executeUpdate("delete from funcionario where CPF = '" + cpf + "';");
 
@@ -227,6 +227,266 @@ public class CRUDfuncionariocontroller implements Initializable {
 	}
 	
 	@FXML
+	private void update(ActionEvent event)
+	{
+		String estadocivil, login, senha , endereco , ativo , cpf;
+		
+		estadocivil = this.estadocivilt.getText();
+		login = this.logint.getText();
+		senha = this.senhat.getText();
+		endereco = this.enderecot.getText();
+		ativo = this.ativot.getText();
+		cpf = this.cpft.getText();
+		
+		if( !cpf.equals("") && this.idjornadat.getText().equals("") && this.seqfilialt.getText().equals("") && this.cnpjmatrizt.getText().equals("") &&
+				this.dtadmissaot.getText().equals("") && this.sexot.getText().equals("") && !estadocivil.equals("") 
+				&& !login.equals("") && !senha.equals("") && this.rgt.getText().equals("") &&
+				this.nomet.getText().equals("") && !ativo.equals("") && !endereco.equals(""))
+		{
+			
+			Connection c;
+			try {
+				
+				
+				if(this.DBA.isSelected())
+				{
+					beans.DBA dba = (beans.DBA) Fachada.getInstancia().buscarFuncionario(cpf);
+
+					try {
+						
+						
+						
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+						Statement s = c.createStatement();
+						s.executeUpdate("update funcionario set estado_civil = '"+estadocivil+"' , login = '"+login+"' , senha = '"+ senha+"', endereco = '"+ endereco+"' , situacao = '"+ ativo+ "' where CPF = '"+ cpf +"' ;" );
+						dba.setEstadocivil(estadocivil);
+						dba.setLogin(login);
+						dba.setSenha(senha);
+						dba.setEndereco(endereco);
+						dba.setSituacao(ativo);
+						
+						try
+						{
+							((Node) (event.getSource())).getScene().getWindow().hide();
+							
+							Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+							Scene scene = new Scene(root);
+							Stage stage = new Stage();
+							stage.setScene(scene);
+							stage.setTitle("Login");
+							stage.show();
+						}
+						catch(Exception e)
+						{
+							System.out.println("Erro!");
+							System.out.println(e.getMessage());
+						}
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					
+				}
+				if(this.gerente.isSelected())
+				{
+					beans.Gerente gerente = (beans.Gerente) Fachada.getInstancia().buscarFuncionario(cpf);
+
+					try {
+						
+						
+						
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+						Statement s = c.createStatement();
+						s.executeUpdate("update funcionario set estado_civil = '"+estadocivil+"' , login = '"+login+"' , senha = '"+ senha+"', endereco = '"+ endereco+"' , situacao = '"+ ativo+ "' where CPF = '"+ cpf +"' ;" );
+						
+						gerente.setEstadocivil(estadocivil);
+						gerente.setLogin(login);
+						gerente.setSenha(senha);
+						gerente.setEndereco(endereco);
+						gerente.setSituacao(ativo);
+						
+						try
+						{
+							((Node) (event.getSource())).getScene().getWindow().hide();
+							
+							Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+							Scene scene = new Scene(root);
+							Stage stage = new Stage();
+							stage.setScene(scene);
+							stage.setTitle("Login");
+							stage.show();
+						}
+						catch(Exception e)
+						{
+							System.out.println("Erro!");
+							System.out.println(e.getMessage());
+						}
+						
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				if(this.supervisorestoque.isSelected())
+				{
+					
+					beans.SurpevisorEstoque sup = (beans.SurpevisorEstoque) Fachada.getInstancia().buscarFuncionario(cpf);
+					
+					try {
+						
+						
+						
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+						Statement s = c.createStatement();
+						s.executeUpdate("update funcionario set estado_civil = '"+estadocivil+"' , login = '"+login+"' , senha = '"+ senha+"', endereco = '"+ endereco+"' , situacao = '"+ ativo+ "' where CPF = '"+ cpf +"' ;" );
+						
+						sup.setEstadocivil(estadocivil);
+						sup.setLogin(login);
+						sup.setSenha(senha);
+						sup.setEndereco(endereco);
+						sup.setSituacao(ativo);
+						
+						try
+						{
+							((Node) (event.getSource())).getScene().getWindow().hide();
+							
+							Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+							Scene scene = new Scene(root);
+							Stage stage = new Stage();
+							stage.setScene(scene);
+							stage.setTitle("Login");
+							stage.show();
+						}
+						catch(Exception e)
+						{
+							System.out.println("Erro!");
+							System.out.println(e.getMessage());
+						}
+						
+						
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+				}
+				if(this.estoquista.isSelected())
+				{
+					
+					beans.Estoquista est = (beans.Estoquista) Fachada.getInstancia().buscarFuncionario(cpf);
+					
+					try {
+						
+						
+						
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+						Statement s = c.createStatement();
+						s.executeUpdate("update funcionario set estado_civil = '"+estadocivil+"' , login = '"+login+"' , senha = '"+ senha+"', endereco = '"+ endereco+"' , situacao = '"+ ativo+ "' where CPF = '"+ cpf +"' ;" );
+						
+						est.setEndereco(endereco);
+						est.setSenha(senha);
+						est.setLogin(login);
+						est.setEstadocivil(estadocivil);
+						est.setSituacao(ativo);
+						
+						try
+						{
+							((Node) (event.getSource())).getScene().getWindow().hide();
+							
+							Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+							Scene scene = new Scene(root);
+							Stage stage = new Stage();
+							stage.setScene(scene);
+							stage.setTitle("Login");
+							stage.show();
+						}
+						catch(Exception e)
+						{
+							System.out.println("Erro!");
+							System.out.println(e.getMessage());
+						}
+
+						
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if(this.entregador.isSelected())
+				{
+					
+					beans.Entregador entre = (beans.Entregador) Fachada.getInstancia().buscarFuncionario(cpf);
+					
+					try {
+						
+						
+						
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+						Statement s = c.createStatement();
+						s.executeUpdate("update funcionario set estado_civil = '"+estadocivil+"' , login = '"+login+"' , senha = '"+ senha+"', endereco = '"+ endereco+"' , situacao = '"+ ativo+ "' where CPF = '"+ cpf +"' ;" );
+						
+						entre.setEstadocivil(estadocivil);
+						entre.setLogin(login);
+						entre.setSenha(senha);
+						entre.setEndereco(endereco);
+						entre.setSituacao(ativo);
+
+						try
+						{
+							((Node) (event.getSource())).getScene().getWindow().hide();
+							
+							Parent root = FXMLLoader.load(getClass().getResource("FuncionarioCRUD.fxml"));
+							Scene scene = new Scene(root);
+							Stage stage = new Stage();
+							stage.setScene(scene);
+							stage.setTitle("Login");
+							stage.show();
+						}
+						catch(Exception e)
+						{
+							System.out.println("Erro!");
+							System.out.println(e.getMessage());
+						}
+						
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+								
+				
+				
+			} catch (Objectnotfound e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Warning Dialog");
+				alert.setHeaderText("Impossivel realizar a acao");
+				alert.setContentText("Funcionario com o codigo " + e.getidObjeto() + " nao existe");	
+				alert.showAndWait();
+			}
+			
+			
+			
+		}
+		else
+		{
+			this.labelaviso.setText("Digite apenas os campos necessarios");
+		}
+		
+		
+		
+	}
+	
+	@FXML
 	private void submit(ActionEvent event)
 	{
 		String cpf, idjornada, seqfilial , cnpjmatriz, dataadmissao , sex, estadocivil, login , senha , rg , nome , situacao, endereco;
@@ -261,7 +521,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 					Connection c;
 					try {
 						
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
 								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
@@ -328,7 +588,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 					Connection c;
 						try {
 							
-							c = ConnectionDataBase.getConnection();
+							c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 							Statement s = c.createStatement();
 							s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
 									+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
@@ -393,7 +653,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 					Connection c;
 					try {
 						
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
 								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
@@ -458,7 +718,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 					Connection c;
 					try {
 						
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
 								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"
@@ -520,7 +780,7 @@ public class CRUDfuncionariocontroller implements Initializable {
 					Connection c;
 					try {
 						
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("INSERT INTO funcionario (CPF, id_jornada, seq_filial, cnpj_matriz, data_admissao"
 								+ ", sex, estado_civil, login, senha, RG, nome, situacao, endereco) VALUES"

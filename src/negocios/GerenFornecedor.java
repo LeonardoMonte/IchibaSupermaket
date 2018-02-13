@@ -10,22 +10,11 @@ import interfaces.RepositorioFornecedorInterface;
 
 public class GerenFornecedor {
 
-	private static GerenFornecedor instancia;
 	private RepositorioFornecedorInterface rep;
 	
-	private GerenFornecedor()
+	public GerenFornecedor(RepositorioFornecedorInterface rep)
 	{
-		this.rep = RepositorioFornecedor.getInstancia();
-	}
-	
-	public static GerenFornecedor getInstancia()
-	{
-		if(instancia == null)
-		{
-			instancia = new GerenFornecedor();
-		}
-		
-		return instancia;
+		this.rep = rep;
 	}
 	
 	

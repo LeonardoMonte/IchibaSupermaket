@@ -152,7 +152,7 @@ public class CRUDfornecedorcontroller implements Initializable {
 					
 					Connection c;
 					try {
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("update fornecedor set rua = '"+ rua+"' , bairro = '"+bairro+"' , CEP = '"+ cep+"', estado = '"+ estado+"' , ativo = "+ status2	+ " where cod = '"+ codigo +"' ;" );
 
@@ -245,7 +245,7 @@ public class CRUDfornecedorcontroller implements Initializable {
 				
 			Connection c;
 				try {
-					c = ConnectionDataBase.getConnection();
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 					Statement s = c.createStatement();
 					s.executeUpdate("delete from fornecedor where cod = '" + codigo + "';");
 
@@ -321,7 +321,7 @@ public class CRUDfornecedorcontroller implements Initializable {
 				Connection c;
 				try {
 					
-					c = ConnectionDataBase.getConnection();
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 					Statement s = c.createStatement();
 					s.executeUpdate("INSERT INTO fornecedor ( cod , nome , CNPJ , rua , bairro , CEP , estado , ativo ) VALUES"
 							+ " ('"+codigo+"' , '"+nome+"'	  , '"+CNPJ+"' , '"+rua+"' , '"+bairro+"' "

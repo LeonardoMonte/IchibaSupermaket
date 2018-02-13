@@ -15,24 +15,14 @@ import interfaces.RepositorioFornecedorInterface;
 
 public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 	
-	private static RepositorioFornecedor instancia;
 	private ArrayList<Fornecedor> listafornecedor;
 	
 	
-	private RepositorioFornecedor()
+	public RepositorioFornecedor()
 	{
 		this.listafornecedor = this.load();
 	}
 	
-	public static RepositorioFornecedor getInstancia()
-	{
-		if(instancia == null)
-		{
-			instancia = new RepositorioFornecedor();
-		}
-		
-		return instancia;
-	}
 	
 		
 	public void cadastrarFornecedor (Fornecedor f) throws Objetojaexiste 
@@ -115,13 +105,13 @@ public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 		return resultado;	
 	}
 	
-	private static ArrayList<Fornecedor> load()
+	private ArrayList<Fornecedor> load()
 	{
 		ArrayList<Fornecedor> rep = new ArrayList<>();
 		
 		try
 		{
-		Connection c = ConnectionDataBase.getConnection();
+		Connection c = ConnectionDataBase.getConnection2();
 		Statement s = c.createStatement();
 		ResultSet rs = s.executeQuery("select * from fornecedor");
 		
@@ -132,6 +122,7 @@ public class RepositorioFornecedor implements RepositorioFornecedorInterface {
 			
 			rep.add(f);
 		}
+		
 		
 		s.close();
 		c.close();	

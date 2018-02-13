@@ -11,23 +11,13 @@ import interfaces.RepositorioFuncionarioInterface;
 
 public class GerenFuncionario {
 
-	private static GerenFuncionario instancia;
 	private RepositorioFuncionarioInterface rep;
 	
-	private GerenFuncionario()
+	public GerenFuncionario(RepositorioFuncionarioInterface rep)
 	{
-		this.rep = RepositorioFuncionarios.getInstancia();
+		this.rep = rep;
 	}
 	
-	public static GerenFuncionario getInstancia()
-	{
-		if(instancia == null)
-		{
-			instancia = new GerenFuncionario();
-		}
-		
-		return instancia;
-	}
 	
 	public void cadastrar(Funcionario f) throws Objetojaexiste
 	{

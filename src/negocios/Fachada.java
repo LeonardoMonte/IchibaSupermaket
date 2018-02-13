@@ -2,12 +2,30 @@ package negocios;
 
 import java.util.List;
 
+import beans.Estoque;
 import beans.Fornecedor;
 import beans.Funcionario;
+import beans.Item_estoque;
+import beans.Perda;
+import beans.Prateleira;
 import beans.Produto_ref;
+import dados.RepositorioEstoque;
+import dados.RepositorioFornecedor;
+import dados.RepositorioFuncionarios;
+import dados.RepositorioItem_estoque;
+import dados.RepositorioPerda;
+import dados.RepositorioPrateleira;
+import dados.RepositorioProdutos;
 import exceptions.Objectnotfound;
 import exceptions.Objetojaexiste;
 import exceptions.Wrongsenha;
+import interfaces.RepositorioEstoqueInterface;
+import interfaces.RepositorioFornecedorInterface;
+import interfaces.RepositorioFuncionarioInterface;
+import interfaces.RepositorioItem_estoqueInterface;
+import interfaces.RepositorioPerdaInterface;
+import interfaces.RepositorioPrateleiraInterface;
+import interfaces.RepositorioProdutoInterface;
 
 public class Fachada {
 
@@ -15,13 +33,34 @@ public class Fachada {
 	private GerenFuncionario gerenfuncionario;
 	private GerenFornecedor gerenfornecedor;
 	private GerenProduto gerenproduto;
+	private GerenItem_estoque gerenitemestoque;
+	private GerenEstoque gerenestoque;
+	private GerenPrateleira gerenprate;
+	private GerenPerda gerenperda;
 	
 	
 	private Fachada()
 	{
-		this.gerenfornecedor = GerenFornecedor.getInstancia();
-		this.gerenfuncionario = GerenFuncionario.getInstancia();
-		this.gerenproduto = GerenProduto.getInstancia();
+		RepositorioFuncionarioInterface repfuncionario = new RepositorioFuncionarios();
+		this.gerenfuncionario = new GerenFuncionario(repfuncionario);
+		
+		RepositorioProdutoInterface repproduto =  new RepositorioProdutos();
+		this.gerenproduto = new GerenProduto(repproduto);
+		
+		RepositorioFornecedorInterface repfornecedor = new RepositorioFornecedor();
+		this.gerenfornecedor = new GerenFornecedor(repfornecedor);	
+		
+		RepositorioItem_estoqueInterface repitemestoque = new RepositorioItem_estoque();
+		this.gerenitemestoque = new GerenItem_estoque(repitemestoque);
+		
+		RepositorioEstoqueInterface repestoque = new RepositorioEstoque();
+		this.gerenestoque = new GerenEstoque(repestoque);
+		
+		RepositorioPrateleiraInterface repprate = new RepositorioPrateleira();
+		this.gerenprate = new GerenPrateleira(repprate);
+		
+		RepositorioPerdaInterface repperda = new RepositorioPerda();
+		this.gerenperda = new GerenPerda(repperda);
 		
 	}
 	
@@ -161,6 +200,89 @@ public class Fachada {
 	
 	
 	// FIM PRODUTO
+	
+	// INICIO ITEMESTOQUE
+	
+	
+	public void cadastraritem(Item_estoque i) throws Objetojaexiste
+	{
+		this.gerenitemestoque.cadastrar(i);
+	}
+	
+	public void atualizaritem(Item_estoque i) throws Objectnotfound, Objetojaexiste
+	{
+		this.gerenitemestoque.atualizar(i);
+	}
+	
+	public void removeritem(String codlote , String codproduto , String idestoque) throws Objectnotfound
+	{
+		this.gerenitemestoque.remover(codlote, codproduto, idestoque);
+	}
+	
+	public Item_estoque buscaritem(String codlote, String codproduto , String idestoque) throws Objectnotfound
+	{
+		return this.gerenitemestoque.buscar(codlote, codproduto, idestoque);
+	}
+	
+	public List<Item_estoque> listaritem()
+	{
+		return this.gerenitemestoque.listar();
+	}
+	
+	// FIM ITEM ESTOQUE
+	
+	// INICIO DE ESTOQUE
+	
+	
+	public List<Estoque> listarestoque()
+	{
+		return this.gerenestoque.listar();
+	}
+	
+	public Estoque buscarestoque(String codigo) throws Objectnotfound
+	{
+		return this.gerenestoque.buscarestoque(codigo);
+	}
+	
+	// FIM DE ESTOQUE
+	
+	// INICIO PRATELEIRA
+	
+	public List<Prateleira> listarprateleira()
+	{
+		return this.gerenprate.listar();
+	}
+	// FIM PRATELEIRA
+	
+	// INICIO DE PERDA
+	
+	public void cadastrarperda(Perda p ) throws Objetojaexiste
+	{
+		this.gerenperda.cadastrar(p);
+	}
+	
+	public void atualizarperda(Perda p) throws Objectnotfound, Objetojaexiste
+	{
+		this.gerenperda.atualizar(p);
+	}
+	
+	public void removerperda(String seq) throws Objectnotfound
+	{
+		this.gerenperda.remover(seq);
+	}
+	
+	public Perda buscarperda(String seq) throws Objectnotfound
+	{
+		return this.buscarperda(seq);
+	}
+	
+	public List<Perda> listarperda()
+	{
+		return this.gerenperda.listar();
+	}
+	
+	// FIM DE PERDA
+	
 	
 	
 }

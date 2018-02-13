@@ -221,7 +221,7 @@ public class CRUDprodutocontroller implements Initializable{
 				
 				Connection c;
 				try {
-					c = ConnectionDataBase.getConnection();
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 					Statement s = c.createStatement();
 					s.executeUpdate("delete from produto_ref where cod = '" + codigo + "';");
 
@@ -322,7 +322,7 @@ public class CRUDprodutocontroller implements Initializable{
 					
 					Connection c;
 					try {
-						c = ConnectionDataBase.getConnection();
+						c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 						Statement s = c.createStatement();
 						s.executeUpdate("update produto_ref set qtd_estoque = "+ qtdestoque2+" "
 								+ " , preco_por_tabela = "+precoportable+" , freq_pedido = "+ freqpedido2+" , "
@@ -449,7 +449,7 @@ public class CRUDprodutocontroller implements Initializable{
 				Connection c;
 				try {
 					
-					c = ConnectionDataBase.getConnection();
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
 					Statement s = c.createStatement();
 					s.executeUpdate("INSERT INTO produto_ref (cod, id_unidade , id_marca , id_ncm , "
 							+ "id_categoria, id_subcategoria, id_fornecedor , qtd_estoque ,\r\n" + 

@@ -10,23 +10,13 @@ import interfaces.RepositorioProdutoInterface;
 
 public class GerenProduto {
 	
-	private static GerenProduto instancia;
 	private RepositorioProdutoInterface rep;
 	
-	private GerenProduto()
+	public GerenProduto(RepositorioProdutoInterface rep)
 	{
-		this.rep = RepositorioProdutos.getInstancia();
+		this.rep = rep;
 	}
 	
-	public static GerenProduto getInstancia()
-	{
-		if(instancia == null)
-		{
-			instancia = new GerenProduto();
-		}
-		
-		return instancia;
-	}
 	
 	public void cadastrar(Produto_ref p) throws Objetojaexiste
 	{

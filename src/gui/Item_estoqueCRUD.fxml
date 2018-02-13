@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="777.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CRUDitem_estoquecontroller">
+   <children>
+      <Pane prefHeight="815.0" prefWidth="1082.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="tableproduto" layoutX="14.0" layoutY="46.0" onMouseClicked="#selecionarproduto" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="codigoproduto" prefWidth="96.0" text="codigo" />
+                <TableColumn fx:id="descricaoproduto" prefWidth="103.0" text="descricao" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tableestoque" layoutX="373.0" layoutY="46.0" onMouseClicked="#selecionarestoque" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="idestoque" prefWidth="93.0" text="ID" />
+                <TableColumn fx:id="descricaoestoque" prefWidth="106.0" text="descricao" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tableprateleira" layoutX="722.0" layoutY="46.0" onMouseClicked="#selecionarprateleira" prefHeight="200.0" prefWidth="150.0">
+              <columns>
+                <TableColumn fx:id="codigoprateleira" prefWidth="149.0" text="codigo" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tableitemestoque" layoutX="10.0" layoutY="457.0" onMouseClicked="#selecionaritem_estoque" prefHeight="252.0" prefWidth="928.0">
+              <columns>
+                <TableColumn fx:id="cod_lote" prefWidth="85.0" text="cod_lote" />
+                <TableColumn fx:id="id_estoque" prefWidth="91.0" text="id_esto" />
+                  <TableColumn fx:id="cod_produto" prefWidth="74.0" text="cod_prod" />
+                  <TableColumn fx:id="id_avaria" prefWidth="70.0" text="id_ava" />
+                  <TableColumn fx:id="id_prateleira" text="id_prat" />
+                  <TableColumn fx:id="dt_validade" prefWidth="111.0" text="dt validade" />
+                  <TableColumn fx:id="dt_fabricacao" prefWidth="108.0" text="dt fabricaçao" />
+                  <TableColumn fx:id="dt_entrada" prefWidth="106.0" text="dt entrada" />
+                  <TableColumn fx:id="valorcompra" prefWidth="108.0" text="valor compra" />
+                  <TableColumn fx:id="quantidade" prefWidth="94.0" text="quantidade" />
+              </columns>
+            </TableView>
+            <TextField fx:id="codlotet" layoutX="21.0" layoutY="284.0" promptText="codigo lote" />
+            <TextField fx:id="idavariat" layoutX="21.0" layoutY="362.0" promptText="id avaria" />
+            <TextField fx:id="dt_fabricacaot" layoutX="254.0" layoutY="362.0" promptText="data de fabricaçao" />
+            <TextField fx:id="dt_validadet" layoutX="254.0" layoutY="284.0" promptText="data de validade" />
+            <TextField fx:id="dtentradat" layoutX="488.0" layoutY="284.0" promptText="data de entrada" />
+            <TextField fx:id="valorcomprat" layoutX="488.0" layoutY="362.0" promptText="valor compra" />
+            <TextField fx:id="quantidadet" layoutX="722.0" layoutY="323.0" promptText="quantidade" />
+            <Label layoutX="72.0" layoutY="14.0" prefHeight="21.0" prefWidth="85.0" text="Produto">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="437.0" layoutY="14.0" text="Estoque">
+               <font>
+                  <Font name="Arial Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="760.0" layoutY="14.0" text="Prateleira">
+               <font>
+                  <Font name="Arial Bold" size="19.0" />
+               </font>
+            </Label>
+            <Button fx:id="submit" layoutX="656.0" layoutY="724.0" mnemonicParsing="false" onAction="#submit" onMouseClicked="#selecionarprateleira" text="submit" />
+            <Button fx:id="delete" layoutX="741.0" layoutY="724.0" mnemonicParsing="false" onAction="#delete" text="delete" />
+            <Button fx:id="update" layoutX="839.0" layoutY="724.0" mnemonicParsing="false" onAction="#update" text="update" />
+            <Label fx:id="aviso" layoutX="267.0" layoutY="729.0" prefHeight="21.0" prefWidth="312.0" />
+            <Label layoutX="376.0" layoutY="420.0" text="Item_estoque">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="66.0" layoutY="255.0" text="codigo lote" />
+            <Label layoutX="66.0" layoutY="328.0" text="id avaria" />
+            <Label layoutX="296.0" layoutY="259.0" text="data de validade" />
+            <Label layoutX="286.0" layoutY="329.0" text="data de fabricacao" />
+            <Label layoutX="521.0" layoutY="259.0" text="data de entrada" />
+            <Label layoutX="530.0" layoutY="329.0" text="valor compra" />
+            <Label layoutX="777.0" layoutY="289.0" text="quantidade" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

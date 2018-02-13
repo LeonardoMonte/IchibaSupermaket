@@ -21,24 +21,14 @@ import interfaces.RepositorioFuncionarioInterface;
 
 public class RepositorioFuncionarios implements RepositorioFuncionarioInterface {
 	
-	private static RepositorioFuncionarios instancia;
 	private ArrayList<Funcionario> listafuncionarios;
+
 	
-	
-	private RepositorioFuncionarios()
+	public RepositorioFuncionarios()
 	{
 		this.listafuncionarios = this.load();
 	}
 	
-	public static RepositorioFuncionarios getInstancia()
-	{
-		if(instancia == null)
-		{
-			instancia = new RepositorioFuncionarios();
-		}
-		
-		return instancia;
-	}
 	
 	
 	public void cadastrarFuncionario(Funcionario f) throws Objetojaexiste 
@@ -146,14 +136,14 @@ public class RepositorioFuncionarios implements RepositorioFuncionarioInterface 
 	}
 	
 	
-	private static ArrayList<Funcionario> load()
+	private ArrayList<Funcionario> load()
 	{
 		ArrayList<Funcionario> f = new ArrayList<>();
 		
 		
 		try
 		{
-			Connection c = ConnectionDataBase.getConnection();
+			Connection c = ConnectionDataBase.getConnection2();
 			Statement s = c.createStatement();
 			
 			ResultSet rs = s.executeQuery("select * from funcionario inner join DBA where funcionario.CPF = DBA.cpf;");		
@@ -225,6 +215,7 @@ public class RepositorioFuncionarios implements RepositorioFuncionarioInterface 
 			
 				f.add(supervisor);
 			}
+			
 			
 		c.close();
 		s.close();

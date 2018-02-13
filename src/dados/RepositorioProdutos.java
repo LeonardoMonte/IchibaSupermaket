@@ -14,27 +14,13 @@ import interfaces.RepositorioProdutoInterface;
 
 public class RepositorioProdutos implements RepositorioProdutoInterface {
 	
-		private static RepositorioProdutos instancia;
-		private ArrayList<Produto_ref> listaprodutos;
+		private ArrayList<Produto_ref> listaprodutos;	
 		
-		
-		private RepositorioProdutos()
+		public RepositorioProdutos()
 		{
 			this.listaprodutos = this.load();
 			
-		}
-		
-		public static RepositorioProdutos getInstancia()
-		{
-			if(instancia == null)
-			{
-				instancia = new RepositorioProdutos();
-			}
-			
-			return instancia;
-		}
-		
-		
+		}		
 		
 		public void cadastrarProduto(Produto_ref p) throws Objetojaexiste
 		{
@@ -125,13 +111,13 @@ public class RepositorioProdutos implements RepositorioProdutoInterface {
 			return this.listaprodutos;
 		}
 		
-		public static ArrayList<Produto_ref> load()
+		public ArrayList<Produto_ref> load()
 		{
 			ArrayList<Produto_ref> array = new ArrayList<>();
 				
 				try
 				{
-				Connection c = ConnectionDataBase.getConnection();
+				Connection c = ConnectionDataBase.getConnection2();
 				Statement s = c.createStatement();
 				ResultSet rs = s.executeQuery("select * from produto_ref");
 				
@@ -151,6 +137,7 @@ public class RepositorioProdutos implements RepositorioProdutoInterface {
 					
 					
 				}
+				
 				
 				s.close();
 				c.close();
