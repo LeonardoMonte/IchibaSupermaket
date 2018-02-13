@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import beans.ConnectionDataBase;
+import beans.Funcionario;
+import beans.Gerente;
 import beans.Item_estoque;
 import beans.Perda;
 import exceptions.Objectnotfound;
+import exceptions.Objetojaexiste;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,13 +35,22 @@ import negocios.Fachada;
 public class PerdaCRUDcontroller implements Initializable{
 
 	@FXML
-	private Button deleteitem;
+	private Button retornar;
+	
+	@FXML
+	private Button Listar;
+	
+	@FXML
+	private TableView<Gerente> tablegerente;
+	
+	@FXML
+	private TableColumn<Gerente, String> cpf;
+	
+	@FXML
+	private TableColumn<Gerente, String> nome;
 	
 	@FXML
 	private TextField sequencialt;
-	
-	@FXML
-	private TextField cpfgerentet;
 	
 	@FXML
 	private TextField diat;
@@ -123,6 +135,54 @@ public class PerdaCRUDcontroller implements Initializable{
 	
 	private Item_estoque itemestoqueescolhido;
 	private Perda perdaescolhida;
+	private Gerente gerenteescolhido;
+	
+	@FXML
+	private void retornar(ActionEvent event)
+	{
+		try
+		{
+			((Node) (event.getSource())).getScene().getWindow().hide();
+			
+			Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Perda");
+			stage.show();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Erro!");
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	@FXML
+	private void selecionargerente()
+	{
+		this.gerenteescolhido = this.tablegerente.getSelectionModel().getSelectedItem();
+	}
+	
+	@FXML
+	private void listar()
+	{
+		
+		ArrayList<Perda> p = (ArrayList<Perda>) Fachada.getInstancia().listarperda();		
+		
+		this.seq.setCellValueFactory(new PropertyValueFactory<>("seq"));
+		this.cod_lotep.setCellValueFactory(new PropertyValueFactory<>("cod_lote"));
+		this.cod_produtop.setCellValueFactory(new PropertyValueFactory<>("cod_produto"));
+		this.id_estoquep.setCellValueFactory(new PropertyValueFactory<>("id_estoque"));
+		this.cpfgerente.setCellValueFactory(new PropertyValueFactory<>("cpf_gerente"));
+		this.dia.setCellValueFactory(new PropertyValueFactory<>("dia"));
+		this.qtdperdida.setCellValueFactory(new PropertyValueFactory<>("quantidade_perdida"));
+		this.motivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
+		
+		this.tableperda.setItems(FXCollections.observableArrayList(p));
+		
+	}
 	
 	@FXML
 	private void selecionaritem_estoque()
@@ -202,7 +262,7 @@ public class PerdaCRUDcontroller implements Initializable{
 					Scene scene = new Scene(root);
 					Stage stage = new Stage();
 					stage.setScene(scene);
-					stage.setTitle("Login");
+					stage.setTitle("Perda");
 					stage.show();
 				}
 				catch(Exception e)
@@ -237,7 +297,87 @@ public class PerdaCRUDcontroller implements Initializable{
 	@FXML
 	private void submit(ActionEvent event)
 	{
-		String sequencial, cod_lote , cod_produto, id_estoque;
+		String sequencial, cod_lote , cod_produto, id_estoque, cpf_gerente,
+		dia , quantidade_perdida , motivo;
+		
+		sequencial = this.sequencialt.getText();
+		cod_lote = this.itemestoqueescolhido.getCod_lote();
+		cod_produto = this.itemestoqueescolhido.getCod_produto();
+		id_estoque = this.itemestoqueescolhido.getId_estoque();
+		cpf_gerente = this.gerenteescolhido.getCpf();
+		dia = this.diat.getText();
+		quantidade_perdida = this.qtdperdidat.getText();
+		motivo = this.motivot.getText();
+		
+		if(!sequencial.equals("") && !cod_lote.equals("") && !cod_produto.equals("") &&
+				!id_estoque.equals("") && !cpf_gerente.equals("") && !dia.equals("") && 
+				!quantidade_perdida.equals("") && !motivo.equals(""))
+		{
+			
+			int quantidade_perdida2 = Integer.parseInt(quantidade_perdida);
+			
+			Perda p = new Perda(sequencial, cod_lote, cod_produto, id_estoque, cpf_gerente, dia, quantidade_perdida2, motivo);
+			
+			try {
+				
+				Connection c;
+				try {
+					
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+					Statement s = c.createStatement();
+					s.executeUpdate(" INSERT INTO perda ( seq , cod_lote, cod_produto, id_estoque, cpf_gerente , dia , quantidade_perdida , motivo) VALUES"+
+						"( '"+sequencial+"' , '"+cod_lote+"' , '"+cod_produto+"', '"+id_estoque+"' , '"+cpf_gerente+"' , '"+dia+"' , "+quantidade_perdida2+" , ' "+motivo+" ' );");
+
+					
+					s.close();
+					c.close();
+					
+				} catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
+				Fachada.getInstancia().cadastrarperda(p);
+				
+				
+				try
+				{
+					((Node) (event.getSource())).getScene().getWindow().hide();
+					
+					Parent root = FXMLLoader.load(getClass().getResource("PerdaCRUD.fxml"));
+					Scene scene = new Scene(root);
+					Stage stage = new Stage();
+					stage.setScene(scene);
+					stage.setTitle("Perda");
+					stage.show();
+				}
+				catch(Exception e)
+				{
+					System.out.println("Erro!");
+					System.out.println(e.getMessage());
+				}
+				
+				
+				
+			} catch (Objetojaexiste exc) {
+				
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Warning Dialog");
+				alert.setHeaderText("Impossivel realizar a acao");
+				alert.setContentText("Item_estoque com o codigo " + exc.getId() + " Ja existe");
+				alert.showAndWait();
+				
+			}
+			
+			
+		}
+		else
+		{
+			this.aviso.setText("preencha todos os campos");
+		}
+		
 		
 	}
 	
@@ -245,13 +385,91 @@ public class PerdaCRUDcontroller implements Initializable{
 	private void update(ActionEvent event)
 	{
 		
+		String sequencial, dia , qtdperdida , motivo;
+		sequencial = this.perdaescolhida.getSeq();
+		dia = this.diat.getText();
+		qtdperdida = this.qtdperdidat.getText();
+		motivo = this.motivot.getText();
+		
+		if(!sequencial.equals("") && !dia.equals("") && !qtdperdida.equals("") && !motivo.equals(""))
+		{
+			
+			int qtdperdida2 = Integer.parseInt(qtdperdida);
+			
+			try {
+				
+				Connection c;
+				try {
+					
+					c = ConnectionDataBase.getConnection(Logincontroller.getUsername() , Logincontroller.getPassword());
+					Statement s = c.createStatement();
+					s.executeUpdate("update perda set dia = '"+ dia +"' , quantidade_perdida = "+qtdperdida2+" , motivo = '"+motivo + "' where seq = '"+ sequencial +"' ; ");
+
+					
+					s.close();
+					c.close();
+					
+					Perda p = Fachada.getInstancia().buscarperda(sequencial);
+					p.setDia(dia);
+					p.setQuantidade_perdida(qtdperdida2);
+					p.setMotivo(motivo);
+					
+				} catch (Objectnotfound exc) {
+					
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Warning Dialog");
+					alert.setHeaderText("Impossivel realizar a acao");
+					alert.setContentText("Item_estoque com o codigo " + exc.getidObjeto() + " nao existe");
+					alert.showAndWait();
+					
+				}
+					
+				} catch (Exception e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+								
+				try
+				{
+					((Node) (event.getSource())).getScene().getWindow().hide();
+					
+					Parent root = FXMLLoader.load(getClass().getResource("PerdaCRUD.fxml"));
+					Scene scene = new Scene(root);
+					Stage stage = new Stage();
+					stage.setScene(scene);
+					stage.setTitle("Perda");
+					stage.show();
+				}
+				catch(Exception e)
+				{
+					System.out.println("Erro!");
+					System.out.println(e.getMessage());
+				}
+			
+		}
+		else
+		{
+			this.aviso.setText("do it ritgh");
+		}
+		
 	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		ArrayList<Item_estoque> it = (ArrayList<Item_estoque>) Fachada.getInstancia().listaritem();
+		ArrayList<Item_estoque> it = (ArrayList<Item_estoque>) Fachada.getInstancia().listaritem();	
 		
+		ArrayList<Funcionario> f = (ArrayList<Funcionario>) Fachada.getInstancia().listarFuncionarios();
+		ArrayList<Gerente> g = new ArrayList<>();
+		
+		for(int x = 0 ; x < f.size() ; x++)
+		{
+			if(f.get(x) instanceof Gerente)
+			{
+				g.add((Gerente) f.get(x));
+			}
+		}
 		
 		
 		this.cod_lote.setCellValueFactory(new PropertyValueFactory<>("cod_lote"));
@@ -265,10 +483,18 @@ public class PerdaCRUDcontroller implements Initializable{
 		this.valorcompra.setCellValueFactory(new PropertyValueFactory<>("valor_compra"));
 		this.quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		
+		
+		this.cpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		this.nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+		this.tableitemestoque.setItems(FXCollections.observableArrayList(it));
+		this.tablegerente.setItems(FXCollections.observableArrayList(g));
+		
+		
+
 
 		
-		this.tableitemestoque.setItems(FXCollections.observableArrayList(it));
-
+		
 		
 	}
 

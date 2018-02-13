@@ -79,6 +79,7 @@
             <Label layoutX="521.0" layoutY="259.0" text="data de entrada" />
             <Label layoutX="530.0" layoutY="329.0" text="valor compra" />
             <Label layoutX="777.0" layoutY="289.0" text="quantidade" />
+            <Button fx:id="retornar" layoutX="34.0" layoutY="724.0" mnemonicParsing="false" onAction="#retornar" text="return" />
          </children>
       </Pane>
    </children>

@@ -66,6 +66,9 @@ public class CRUDitem_estoquecontroller implements Initializable{
 	private Button  delete ;
 	
 	@FXML
+	private Button retornar;
+	
+	@FXML
 	private Label aviso;
 	
 	@FXML
@@ -129,6 +132,28 @@ public class CRUDitem_estoquecontroller implements Initializable{
 	private Estoque estoqueescolhido;
 	private Prateleira prateleiraescolhida;
 	private Item_estoque itemestoqueescolhido;
+	
+	@FXML
+	private void retornar(ActionEvent event)
+	{
+		
+		try
+		{
+			((Node) (event.getSource())).getScene().getWindow().hide();
+			
+			Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Perda");
+			stage.show();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Erro!");
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	@FXML
 	private void update(ActionEvent event)

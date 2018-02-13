@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.DatabaseMetaData;
 
@@ -11,11 +12,6 @@ import negocios.Fachada;
 
 public class ConnectionDataBase {
 
-	
-	public static void main(String args[])
-	{
-		System.out.println(Fachada.getInstancia().listarperda());
-	}
 	
 	public static Connection getConnection2() throws Exception
 	{

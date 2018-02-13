@@ -273,7 +273,7 @@ public class Fachada {
 	
 	public Perda buscarperda(String seq) throws Objectnotfound
 	{
-		return this.buscarperda(seq);
+		return this.gerenperda.buscar(seq);
 	}
 	
 	public List<Perda> listarperda()
